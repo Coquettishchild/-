@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<!-- 加载外部资源 -->
+	<properties resource="db.properties"></properties>
+	<settings>
+		<!-- 开启延时加载 -->
+		<setting name="lazyLoadingEnabled" value="true"/>
+		<setting name="aggressiveLazyLoading" value="false"/>
+	</settings>
+	<typeAliases>
+		<typeAlias type="com.questiontest.entity.Paper" alias="paper"/>
+		<typeAlias type="com.questiontest.entity.Questions" alias="question"/>
+		<typeAlias type="com.questiontest.entity.User" alias="user"/>
+		<typeAlias type="com.questiontest.entity.Useranswer" alias="useranswer"/>
+		<!-- 批量定义别名，包名是类名，大小写都行 -->
+	</typeAliases>
+	<environments default="development">
+		<environment id="development">
+			<!-- 事务使用JDBC -->
+			<transactionManager type="JDBC"/>
+			<!-- 数据库连接池 -->		
+			<dataSource type="POOLED">
+				<property name="driver" value="${jdbc.driver}"/>
+				<property name="url" value="${jdbc.url}"/>
+				<property name="username" value="${jdbc.username}"/>
+				<property name="password" value="${jdbc.password}"/>
+			</dataSource>
+		</environment>
+	</environments>
+	<mappers>
+		<mapper resource="sqlmapper/DaoMapper.xml"/>
+	</mappers>
+</configuration>

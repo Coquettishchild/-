@@ -1,0 +1,86 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+body{
+    background-image: url("../image/16sucai_p567c108.JPG");
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+a{
+    position: relative;
+    top: 20px;
+    margin-right: 20px;
+}
+a>span{
+     border: none;
+     width: 80px;
+     height: 30px;
+     font-size: 20px;
+     opacity: 0.6;
+     color: white;
+     border-radius: 5%;
+    text-decoration: none;
+ }
+a>button{
+    border: none;
+    width: 80px;
+    height: 30px;
+    font-size: 20px;
+    background-color: grey;
+    opacity: 0.6;
+    color: white;
+    border-radius: 5%;
+}
+a>span:hover{
+    opacity: 0.8;
+}
+.center>button:hover{
+    opacity: 0.8;
+}
+.center{
+    position: relative;
+    width: 35%;
+    height: 500px;
+    background-color: white;
+    margin:  0 auto;
+    top: 140px;
+    opacity: 0.6;
+    border-radius: 5%;
+}
+.center>p{
+    position: relative;
+    top: 20px;
+    font-size: 25px;
+}
+.center:hover{
+    opacity: 0.8;
+}
+.center>textarea{
+    display: block;
+    position: relative;
+    top: 50px;
+    margin: 0 auto;
+    font-size: 20px;
+}
+.center>button{
+    position: relative;
+    float: none;
+    left: 40%;
+    clear: both;
+    top: 110px;
+    opacity: 1;
+    width: 100px;!important;
+    border:0;
+    height: 35px;
+}
+a>img{
+    width: 35%;
+    margin-left: 20px;
+}
+#my{
+    float: right;
+}
+#goback{
+    float: left;
+}

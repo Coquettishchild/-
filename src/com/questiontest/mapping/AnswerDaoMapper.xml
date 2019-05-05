@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.questiontest.dao.AnswerDaoMapper">
+	<!-- 作者插入答案 -->
+	<insert id="addAnswer" parameterType="answer">
+		insert into answer(content,qid) values(#{content},#{qid})
+	</insert>
+	<!-- 作者修改答案 -->
+	<update id="updateAnswer" parameterType="answer">
+		update answer set content=#{content} where id =#{id}
+	</update>
+	<!-- 用户插入答案 -->
+	<insert id="insertAnswer" parameterType="useranswer">
+		insert into useranswer(context,aid) values(#{context},#{aid})
+	</insert>
+	<!-- 作者删除答案 -->
+	<delete id="deleteAnswer" parameterType="int">
+		delete  from answer where id=#{aid}
+	</delete>
+	<!-- 查询选择题的答案 -->
+	<select id="choiceAnswer" parameterType="int" resultMap="choiceAnswers">
+		call getchoice(#{id});
+	</select>
+	<resultMap type="com.questiontest.entity.ChoiceAnswer" id="choiceAnswers">
+		<result column="qname" property="name"/>
+		<result column="acount" property="acount"/>
+		<result column="bcount" property="bcount"/>
+		<result column="ccount" property="ccount"/>
+		<result column="dcount" property="dcount"/>
+	</resultMap>
+	<!-- 查询简答题答案 -->
+	<select id="questionAnswer" parameterType="int" resultMap="getquestionanswer">
+		select aid,context from useranswer where aid=#{id}
+	</select>
+ 	<resultMap type="com.questiontest.entity.QuestionAnswer" id="getquestionanswer">
+ 		<id column="aid" property="id" />
+		<collection property="answers" ofType="string">
+			<result column="context"/>
+		</collection>
+	</resultMap>
+
+</mapper>

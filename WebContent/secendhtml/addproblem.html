@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>addproblem</title>
+    <link rel="stylesheet" href="../css/addproblem.css"/>
+</head>
+<body>
+<div class="center">
+    <p align="center">添加题目</p>
+    <p>题目名称：</p>
+    <input type="text" placeholder="题目" id="tittle"/><br/>
+    <p>题目类型:</p>
+    <select name="type" id="type">
+        <option value="1">选择</option>
+        <option value="2">简答</option>
+    </select>
+    <p id="choices">答案选项：</p>
+    <p class="p2">A:<input type="text" class="choice"/></p>
+    <p class="p2">B:<input type="text" class="choice"/></p>
+    <p class="p2">C:<input type="text" class="choice"/></p>
+    <p class="p2">D:<input type="text" class="choice"/></p>
+    <br/>
+    <button id="next">添加下一题</button>
+    <button id="finsh">完成</button>
+</div>
+<script type="text/javascript" src="../js/addproblem.js"></script>
+</body>
+</html>

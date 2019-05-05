@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.questiontest.dao.QuestionDaoMapper">
+
+	<!-- 添加题目 -->
+		<insert id="addQuestion" parameterType="question">
+			<selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+				select last_insert_id()
+			</selectKey>
+			insert into questions(name,pid,qtype) values(#{name},#{pid},#{qtype})
+		</insert>
+	<!-- 修改题目 -->
+		<update id="updateQuestion" parameterType="question">
+			update questions set name=#{name},qtype=#{qtype} where id=#{id}
+		</update>
+	<!-- 删除题目 -->
+		<delete id="deleteQuestion" parameterType="int">
+			delete from questions where id =#{id}
+		</delete>
+</mapper>

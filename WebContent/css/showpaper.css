@@ -1,0 +1,83 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+   background-color: grey;
+    background-size: 100%;
+}
+.center{
+    position: relative;
+    width: 60%;
+    clear: both;
+    margin: 0 auto;
+    top: 100px;
+    background-color: white;
+    height: auto;
+    border-radius: 5%;
+    opacity: 0.6;
+}
+.center:hover{
+    opacity: 0.9;
+}
+.center>span{
+    display: block;
+    position: relative;
+    top: 20px;
+    margin: 0 auto;
+    width: 100%;
+    text-align: center;
+    font-size: 30px;
+}
+.center>ul{
+    margin-top: 50px;
+    list-style: none;
+    padding: 0;
+    margin-left: 50px;
+}
+.center>ul>li:last-child{
+    padding-bottom: 80px;
+}
+.center>ul>li{
+    width: 100%;
+    padding-bottom: 30px;
+}
+.center>ul>li>input{
+	margin-left:40px;
+}
+.center>ul>li>p{
+    margin-bottom: 10px;
+    margin-top:20px;
+}
+.center>ul>li>input{
+     margin-left: 5%;
+ }
+.center>ul>li>textarea{
+    margin-left: 5%;
+}
+#tijiao{
+    position: relative;
+    bottom: 30px;
+    display: block;
+    margin: 0 auto;
+    width: 10%;
+    height: 30px;
+    line-height: 30px;
+    border: 0 ;
+    border-radius: 5%;
+    cursor: pointer;
+    margin-top:80px;
+}
+#tijiao:hover{
+    background-color: antiquewhite;
+}
+#fenxiang{
+	font-size:20px;
+	color:blue;
+	border:none;
+	float:right;
+	margin-right:30px;
+	background-color:white;
+	cursor: pointer;
+	padding:5px;
+}

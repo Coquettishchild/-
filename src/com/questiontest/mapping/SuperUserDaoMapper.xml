@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.questiontest.dao.SuperUserDaoMapper">
+	<!-- 超级用户登录 -->
+	<select id="getUser" parameterType="string" resultType="superuser">
+		select * from superuser where username=#{username}
+	</select>
+	<!-- 查询普通用户列表 -->
+	<select id="getuserlist" parameterType="int" resultType="user">
+		select * from user limit #{begin},#{end}
+	</select>
+	<!-- 查询问卷列表 -->
+	<select id="getpaperList" parameterType="int" resultType="paper">
+		select * from paper limit #{begin},#{end}
+	</select>
+	<!-- 删除用户 -->
+	<delete id="deleteUser" parameterType="int">
+		delete from user where id =#{id}
+	</delete>
+	<select id="getTheUser" parameterType="int" resultType="user">
+		select * from user where id = #{id}
+	</select>
+</mapper>

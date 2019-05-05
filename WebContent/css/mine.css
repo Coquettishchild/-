@@ -1,0 +1,85 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    background-image: url("../image/16sucai_p567c108.JPG");
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+.top{
+    position: relative;
+    height: 150px;
+    width: 100%;
+}
+.top>a>img{
+    width: 5%;
+    margin-left: 20px;
+    margin-top: 20px;
+}
+.left{
+    position: relative;
+    width: 25%;
+    height: 600px;
+    float: left;
+}
+.right{
+    position: relative;
+    width: 70%;
+    height: 600px;
+    float: left;
+    background-color: white;
+    border-radius: 5%;
+    opacity: 0.6;
+}
+.left>ul{
+    list-style: none;
+    margin-top: 100px;
+}
+.left>ul>li{
+    line-height: 50px;
+    margin-top: 10px;
+    padding-left: 35%;
+    height: 50px;
+    text-decoration: none;
+    background-color: lightgrey;
+    opacity: 0.6 ;
+}
+.left>ul>li>a{
+    text-decoration: none;
+    color: black;
+}
+.left>ul>li:hover{
+    opacity: 0.9;
+}
+.right>ul{
+    list-style: none;
+    margin-top: 120px;
+    margin-left: 20%;
+}
+.right>ul>li{
+    margin-top: 50px;
+    height: 40px;
+    line-height: 40px;
+    font-size: 20px;
+}
+.right>ul>li>input{
+    margin-left: 160px;
+    height: 25px;
+    width: 25%;
+}
+.right>button{
+    position: relative;
+    float: right;
+    margin-right: 20%;
+    margin-top: 100px;
+    border: none;
+    padding: 10px;
+    border-radius: 5%;
+    background-color: grey;
+    cursor: pointer;
+    width: 10%;
+}
+.right:hover{
+    opacity: 0.9;
+}

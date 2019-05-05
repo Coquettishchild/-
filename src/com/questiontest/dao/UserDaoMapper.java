@@ -1,0 +1,16 @@
+package com.questiontest.dao;
+
+import com.questiontest.entity.User;
+
+public interface UserDaoMapper {
+	//注册
+		//插入用户信息
+		public int insertUser(User user) throws Exception;
+		//查询用户名是否存在
+		public String isextist(String username)throws Exception;
+	//登录
+		//查询密码
+		public User getUser(String username)throws Exception;
+		//修改密码
+		public void updata(User user)throws Exception;
+}

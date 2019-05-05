@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+
+ 	<!-- 自动扫描controller -->
+ 	<context:component-scan base-package="com.questiontest.controller"/>  
+ 	<mvc:annotation-driven/>
+ 	<mvc:interceptors>
+ 		<!-- 编码拦截器 -->
+ 		<mvc:interceptor>
+ 			<mvc:mapping path="*.action"/>
+ 			<bean class="com.questiontest.interceptor.Encoding"/>
+ 		</mvc:interceptor>
+ 		<!-- 普通登录拦截器 -->
+ 		<mvc:interceptor>
+ 			<mvc:mapping path="/*.action"/>
+ 			<mvc:exclude-mapping path="/login.action"/>
+ 			<mvc:exclude-mapping path="/zhuce.action"/>
+ 			<mvc:exclude-mapping path="/isexist.action"/>
+ 			<mvc:exclude-mapping path="/superlogin.action"/>
+ 			<mvc:exclude-mapping path="/addUserAnswer.action"/>
+ 			<mvc:exclude-mapping path="/superlogin.action"/>
+ 			<mvc:exclude-mapping path="/getuserlist.action"/>
+ 			<mvc:exclude-mapping path="/superpaperlist.action"/>
+ 			<mvc:exclude-mapping path="/deleteuser.action"/>
+ 			<mvc:exclude-mapping path="/superdeletePaper.action"/>
+ 			<mvc:exclude-mapping path="/getsuperuser.action"/>
+ 			<mvc:exclude-mapping path="/answerpaper.action"/>
+ 			<mvc:exclude-mapping path="/gettheuser.action"/>
+ 			<bean class="com.questiontest.interceptor.IsNorLogin" />
+ 		</mvc:interceptor>
+ 		<!-- 超级用户登录拦截器 -->
+ 		<mvc:interceptor>
+ 			<mvc:mapping path="/getuserlist.action"/>
+ 			<mvc:mapping path="/superpaperlist.action"/>
+ 			<mvc:mapping path="/deleteuser.action"/>
+ 			<mvc:mapping path="/superdeletePaper.action"/>
+ 			<mvc:mapping path="/gettheuser.action"/>
+ 			<bean class="com.questiontest.interceptor.IsSuperLogin"/>
+ 		</mvc:interceptor>
+ 		<!-- 超级二次登录拦截器 -->
+ 		<mvc:interceptor>
+ 			<mvc:mapping path="/superlogin.action"/>
+ 			<bean class="com.questiontest.interceptor.IsDobleLogin"/>
+ 		</mvc:interceptor>
+ 		<!-- 普通用户登录 -->
+ 		<mvc:interceptor>
+ 			<mvc:mapping path="/login.action"/>
+ 			<bean class="com.questiontest.interceptor.UserDoble"/>
+ 		</mvc:interceptor>
+ 		<!-- 添加问题拦截器 -->
+ 		<mvc:interceptor>
+ 			<mvc:mapping path="/addQuestion.action"/>
+ 			<bean class="com.questiontest.interceptor.AddProblem"/>
+ 		</mvc:interceptor>
+ 	</mvc:interceptors>
+	<!-- 视图解析器 -->
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"/>    
+	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping" />
+    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+        <property name="messageConverters">
+            <list>
+                <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+                    <property name="supportedMediaTypes">
+                        <list>
+                            <value>text/html; charset=UTF-8</value>
+                            <value>application/json;charset=UTF-8</value>
+                        </list>
+                    </property>
+                </bean>
+                <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+                    <property name="supportedMediaTypes">
+                        <list>
+                            <value>text/html; charset=UTF-8</value>
+                            <value>application/json;charset=UTF-8</value>
+                        </list>
+                    </property>
+                </bean>
+            </list>
+        </property>
+    </bean>  
+ </beans>

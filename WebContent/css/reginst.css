@@ -1,0 +1,52 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    background-image: url("../image/16sucai_p567c108.JPG");
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+.center{
+    display: block;
+    width: 40%;
+    position: relative;
+    top: 10px;
+    margin: 0 auto;
+    height: 750px;
+    background-color: grey;
+    border-radius: 5%;
+    opacity: 0.6;
+}
+#name{
+    color: red;
+}
+#password{
+    color: red;
+}
+.center>.f{
+    margin-left: 25%;
+}
+.center>.f>input{
+    margin-top: 30px;
+    margin-bottom: 40px;
+}
+.center>.f>input:first-child{
+    margin-top: 100px !important;
+}
+.btn{
+    border: 0;
+    border-radius: 5%;
+    color: dodgerblue;
+    width: 30%;
+    height: 30px;
+    margin-left: 10%;
+}
+.center:hover{
+    opacity: 1;
+}
+a>img{
+    width: 5%;
+    margin-left: 20px;
+    margin-top: 20px;
+}

@@ -1,0 +1,53 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    background-color: grey;
+    background-size: 100%;
+}
+.center{
+    position: relative;
+    width: 60%;
+    clear: both;
+    margin: 0 auto;
+    top: 100px;
+    background-color: white;
+    height: auto;
+    border-radius: 5%;
+    opacity: 0.6;
+}
+.center:hover{
+    opacity: 0.9;
+}
+.center>span{
+    display: block;
+    position: relative;
+    top: 20px;
+    margin: 0 auto;
+    width: 100%;
+    text-align: center;
+    size: 30px;
+}
+.center>ul{
+    position: relative;
+    width: 60%;
+    display: block;
+    margin: 0 auto;
+    list-style: none;
+}
+.center>ul>li{
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+#tijiao{
+    display: block;
+    position: relative;
+    width: 10%;
+    height: 30px;
+    line-height: 30px;
+    border: none;
+    margin: 0 auto;
+}
+
+

@@ -1,0 +1,46 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    background-image: url("../image/16sucai_p567c108.JPG");
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+.center{
+    position: relative;
+    top: 150px;
+    width: 20%;
+    margin: 0 auto;
+    background-color: grey;
+    padding-top: 80px;
+    padding-bottom: 80px;
+    padding-left: 8%;
+    padding-right: 4%;
+    opacity: 0.6;
+    border-radius: 5%;
+}
+.center:hover{
+    opacity: 1;
+}
+.center>input{
+    margin-top: 10px;
+    border: 0;
+    border-radius: 15%;
+    padding: 5px;
+}
+.btn{
+    margin-left: 55px;
+    margin-top: 10px;
+    border: 0;
+    border-radius: 15%;
+    padding: 5px;
+}
+.btn:hover{
+    background-color: aqua;
+}
+a>img{
+    width: 5%;
+    margin-left: 20px;
+    margin-top: 20px;
+}

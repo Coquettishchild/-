@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.questiontest.dao.PaperDaoMapper">
+	<!-- 插入问卷 -->
+	<insert id="addPaper" parameterType="paper">
+		<selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+			select last_insert_id()
+		</selectKey>
+		insert into paper(name,data,uid) values(#{name},#{data},#{uid});
+	</insert>
+	<!-- 查询单个问卷 -->
+	<select id="queryOnePaper" resultMap="getOnePaper" parameterType="java.lang.Integer">
+		select paper.id     as paperid,
+       paper.name as papername,
+       paper.data,
+       paper.uid,
+       questions.id as questionsid,
+       questions.name as questionname,
+       questions.pid,
+       questions.qtype,
+       answer.id    as answerid,
+       answer.content,
+       answer.qid
+from paper
+         left outer join questions on paper.id = questions.pid
+         left outer join answer on answer.qid = questions.id
+where paper.id =#{pid};
+	</select>
+	<resultMap type="paper" id="getOnePaper">
+		<id column="paperid" property="id"/>
+		<result column="papername" property="name"/>
+		<result column="data" property="data"/>
+		<result column="uid" property="uid"/>
+		<collection property="questions" ofType="question">
+			<id column="questionsid" property="id"/>
+			<result column="questionname" property="name"/>
+			<result column="qtype" property="qtype"/>
+			<result column="pid" property="pid"/>
+			<collection property="answers" ofType="answer">
+				<id column="answerid" property="id"/>
+				<result column="content" property="content"/>
+				<result column="qid" property="qid"/>
+			</collection>
+		</collection>
+	</resultMap>
+	<!-- 查询用户问卷列表 -->
+	<select id="getUserList" parameterType="int" resultType="paper">
+		select * from paper where uid=#{uid} limit #{begin},#{end}
+	</select>
+	<!-- 查询问卷回答人数 -->
+	<select id="getAnswerCount" parameterType="int" resultType="int" statementType="CALLABLE">
+		call getcount3(#{pid});
+	</select>
+	<!-- 删除问卷 -->
+	<delete id="deletePaper" parameterType="int">
+		delete from paper where paper.id =#{pid}
+	</delete>
+</mapper>

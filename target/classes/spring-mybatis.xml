@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+		<!-- 加载配置文件 -->
+	<context:property-placeholder location="classpath:db.properties"/>
+	<!-- sqlSessionfactory -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<!-- 数据源 -->
+		<property name="dataSource" ref="dataSource"/>
+		 <property name="configLocation" value="classpath:sqlmapper.xml"></property>
+		<!-- 加载mybatis配置文件 -->
+		<property name="mapperLocations" value="classpath*:./com/questiontest/mapping/*.xml"/>
+	</bean>
+	<!-- 配置扫描 -->
+	<context:component-scan base-package="com.questiontest.service"/>
+	<!--2 配置C3P0数据源 -->
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+        <!--驱动类名 -->
+        <property name="driverClass" value="${driverClass}" />
+        <!-- url -->
+        <property name="jdbcUrl" value="${jdbcUrl}"/>
+        <!-- 用户名 -->
+        <property name="user" value="${user}" />
+        <!-- 密码 -->
+        <property name="password" value="${password}" />
+        <!-- 当连接池中的连接耗尽的时候c3p0一次同时获取的连接数  -->
+        <property name="acquireIncrement" value="5"></property>
+        <!-- 初始连接池大小 -->
+        <property name="initialPoolSize" value="10"></property>
+        <!-- 连接池中连接最小个数 -->
+        <property name="minPoolSize" value="5"></property>
+        <!-- 连接池中连接最大个数 -->
+        <property name="maxPoolSize" value="20"></property>
+    </bean>
+	<!-- 自动扫描关系配置 -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+		<property name="basePackage" value="com.questiontest.dao"/>
+	</bean>
+</beans>

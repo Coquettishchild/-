@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.questiontest.dao.DaoMapper">
+	<insert id="insertUser" parameterType="user" >
+		<selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+			select last_insert_id()
+		</selectKey>
+		insert into user(username,sex,age,email,password) values(#{username},#{sex},#{age},#{email},#{password})
+	</insert>
+	<select id="getPassword" parameterType="java.lang.String" resultType="java.lang.String">
+		select password from user where username=#{username}
+	</select>
+	<select id="isextist" parameterType="java.lang.String" resultType="java.lang.String">
+		select username from user where username=#{username}
+	</select>
+	<select id="findAll" resultMap="findAll">
+	select user.id as userid,user.username,user.age,user.sex,user.email,
+	paper.id as paperid,paper.name,paper.data,
+	questions.id as questionid,questions.name as questionname,questions.type,
+	answer.id as answerid,answer.content  as answer
+	from user,paper,questions,answer where user.id = paper.uid and questions.pid=paper.id and answer.qid=questions.id;
+	</select>
+	<select id="selectpaperbyid" resultType="com.questiontest.entity.Paper" parameterType="java.lang.Integer">
+		select * from paper where uid=#{uid};
+	</select>
+	<select id="lazyoutGet" resultMap="lazyoutget">
+		select * from user;
+	</select>
+	<resultMap type="com.questiontest.entity.User" id="lazyoutget">
+		<id column="id" property="id"/>
+		<result column="username" property="username"/>
+		<result column="sex" property="sex"/>
+		<result column="age" property="age"/>
+		<collection property="papers" column="id"  ofType="com.questiontest.entity.Paper" select="selectpaperbyid">
+		</collection>
+	</resultMap>
+	<resultMap type="com.questiontest.entity.User" id="findAll">
+		<id column="userid" property="id"/>
+		<result column="username" property="username"/>
+		<result column="age" property="age"/>
+		<result column="sex" property="sex"/>
+		<result column="email" property="email"/>
+		
+		<collection property="papers" ofType="com.questiontest.entity.Paper">
+			<id column="paperid" property="id"/>
+			<result column="name" property="name"/>
+			<result column="data" property="data"/>
+			<collection property="questions" ofType="com.questiontest.entity.Questions">
+				<id column="questionid" property="id"/>
+				<result column="questionname" property="name"/>
+				<result column="type" property="type"/>
+				<collection property="answer" ofType="com.questiontest.entity.Useranswer">
+					<id column="answerid" property="id"/>
+					<result column="answer" property="context"/>
+				</collection>
+			</collection>
+		</collection>
+	</resultMap>
+</mapper>

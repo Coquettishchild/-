@@ -1,0 +1,56 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+body{
+    background-image: url("../image/16sucai_p567c108.JPG");
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
+.center{
+    position: relative;
+    width: 35%;
+    height: 500px;
+    background-color: white;
+    margin:  0 auto;
+    top: 140px;
+    opacity: 0.6;
+    border-radius: 5%;
+}
+.center>p:first-child{
+    display: block;
+    position: relative;
+    top: 20px;
+    margin-bottom: 20px;
+    margin-left: 0!important;
+}
+.center>p{
+    position: relative;
+    display: block;
+    margin-top: 20px;
+    margin-left: 20%;
+}
+.center>input{
+    margin-top: 20px;
+    margin-left: 35%;
+    width: 40%;
+    height: 30px;
+}
+.center>select{
+    margin-top: 20px;
+    margin-left: 35%;
+    width: 40%;
+    height: 30px;
+}
+.center>button{
+    border: 0;
+    margin-left: 20%;
+    width: 20%;
+    height: 30px;
+    background-color: deepskyblue;
+    border-radius: 5%;
+    margin-top:30px;
+}
+.center:hover{
+    opacity: 0.9;
+}
