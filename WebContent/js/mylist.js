@@ -45,6 +45,7 @@ var upqu = document.getElementsByClassName("upqu");
 for (j = 0; j < 10; j++) {
 	update[j].style.display = "none";
 	deletea[j].style.display = "none";
+	jie[j].style.display = "none";
 }
 getlist();
 function getlist() {
@@ -65,6 +66,7 @@ function getlist() {
 					count[j].innerHTML = json.obj[j].answercount;
 					update[j].style.display = "";
 					deletea[j].style.display = "";
+					jie[j].style.display = "";
 				}
 				for(j=json.obj.length;j<10;j++){
 					ids[j] = "";
@@ -73,6 +75,7 @@ function getlist() {
 					count[j].innerHTML = "";
 					update[j].style.display = "none";
 					deletea[j].style.display = "none";
+					jie[j].style.display = "none";
 				}
 				sessionStorage.ids = ids;
 			}else if(json.flag && json.obj.length==0){

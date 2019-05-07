@@ -21,7 +21,7 @@ var tijiao = document.getElementById("tijiao")
 var xhr = createxmlreuqest();
 xhr.open("post","../getresult.action",true);
 xhr.setRequestHeader("content-type","application/x-www-form-urlencoded");
-xhr.send("id="+58);
+xhr.send("id="+paraString);
 var str ="";
 xhr.onreadystatechange = function() {
     if (xhr.readyState == 4 && xhr.status == 200) {
