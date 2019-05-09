@@ -23,6 +23,8 @@
  		<mvc:interceptor>
  			<mvc:mapping path="/*.action"/>
  			<mvc:exclude-mapping path="/login.action"/>
+ 			<mvc:exclude-mapping path="/confire.action"/>
+ 			<mvc:exclude-mapping path="/forget.action"/>
  			<mvc:exclude-mapping path="/zhuce.action"/>
  			<mvc:exclude-mapping path="/isexist.action"/>
  			<mvc:exclude-mapping path="/superlogin.action"/>

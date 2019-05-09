@@ -22,4 +22,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="updata" parameterType="user" >
 		update user set password=#{password},username=#{username},sex=#{sex},age=#{age},email=#{email} where id=#{id}
 	</update>
+<!-- 通过邮箱修改confire -->
+	<select id="confire" parameterType="java.lang.String" resultType="user">
+		update user set confire = 1 where email=#{email}
+	</select>
 </mapper>

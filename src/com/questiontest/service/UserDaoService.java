@@ -66,4 +66,17 @@ public class UserDaoService {
 			return false;
 		}
 	}
+	/*
+	 * 验证邮箱
+	 */
+	public boolean confire(String email) {
+		try {
+			dao.confire(email);
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.err.println("验证失败");
+			return false;
+		}
+	}
 }

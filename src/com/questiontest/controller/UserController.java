@@ -18,6 +18,7 @@ import com.questiontest.entity.ResponseObject;
 import com.questiontest.entity.User;
 import com.questiontest.service.Service;
 import com.questiontest.service.UserDaoService;
+import com.questiontest.util.SendMail;
 
 @Controller
 public class UserController {
@@ -122,6 +123,55 @@ public class UserController {
 			message.setMessage("更改成功");
 		}else {
 			message.setMessage("更改失败");
+		}
+		return message;
+	}
+	
+	@RequestMapping(value="confireemail.action",method=RequestMethod.POST)
+	public @ResponseBody ResponseMessage confireEmail(HttpServletRequest request) {
+		String email = ((User)request.getSession().getAttribute("user")).getEmail();
+		String url = "<a href='http://localhost:8080/QuestionTest/secendhtml/confire.html?email="+email+"'>点击验证</a>";
+		SendMail.sendVerfileEmail(email,url);
+		ResponseMessage message = new ResponseMessage();
+		message.setFlag(true);
+		message.setMessage("我们已经向您的邮箱发送了验证消息，请及时处理");
+		return message;
+	}
+	
+	@RequestMapping(value="confire.action",method=RequestMethod.POST)
+	public @ResponseBody ResponseMessage confire(String email) {
+		boolean flag =service.confire(email);
+		ResponseMessage message = new ResponseMessage();
+		message.setFlag(flag);
+		if(flag) {
+			message.setMessage("验证成功");
+		}else {
+			message.setMessage("验证失败");
+		}
+		return message;
+	}
+	
+	@RequestMapping(value="forget.action",method =RequestMethod.POST)
+	public @ResponseBody ResponseMessage forget(String username) {
+		ResponseMessage message = new ResponseMessage();
+		User user=service.getUser(username);
+		if(user!=null) {
+			int confire = user.getConfire();
+			String email= user.getEmail();
+			String password="abc123";
+			if(confire==1) {
+				message.setFlag(true);
+				user.setPassword(password);
+				service.updata(user);
+				SendMail.sendVerfileEmail(email, password);
+				message.setMessage("我们已经重置了您的密码，并发到您的邮箱上了");
+			}else {
+				message.setFlag(false);
+				message.setMessage("您没有绑定邮箱，无法为您找回密码");
+			}
+		}else {
+			message.setFlag(true);
+			message.setMessage("用户名不存在");
 		}
 		return message;
 	}

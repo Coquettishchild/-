@@ -83,3 +83,13 @@ body{
 .right:hover{
     opacity: 0.9;
 }
+#confire{
+	height:25px;
+	padding: 5px;
+	border:0;
+	backgroup-color:grey;
+	 cursor: pointer;
+}
+#confire:hover{
+    opacity: 0.9;
+}

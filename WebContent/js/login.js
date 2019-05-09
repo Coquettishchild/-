@@ -37,3 +37,22 @@ button.onclick=function () {
         }
     };
 };
+var forget = document.getElementById("forget");
+forget.onclick=function () {
+    var username=document.getElementsByClassName("tijiao")[0];
+    if(username.value==null||username.value==""){
+        alert("请输入您的用户名然后点击忘记密码");
+    }else{
+        var xhr = createxmlreuqest();
+        xhr.open("post","../forget.action",true);
+        xhr.setRequestHeader("content-type","application/x-www-form-urlencoded");
+        xhr.send("username="+username.value);
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                var obj = xhr.responseText;
+                var json = JSON.parse(obj);
+                  alert(json.message);
+            }
+        };
+    }
+};

@@ -44,3 +44,13 @@ a>img{
     margin-left: 20px;
     margin-top: 20px;
 }
+#forget{
+    margin-left:26% ;
+    margin-top: 20px;
+    padding: 5px;
+    border-radius: 5%;
+    border: none;
+}
+#forget:hover{
+    background-color: antiquewhite;
+}

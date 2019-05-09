@@ -9,6 +9,7 @@ public class User implements Cloneable{
 	private int age;
 	private String email;
 	private String password;
+	private int confire;
 	private List<Paper> papers;
 	public User(String username, String sex, int age, String email, String password) {
 		super();
@@ -20,6 +21,12 @@ public class User implements Cloneable{
 	}
 	public User() {}
 	
+	public int getConfire() {
+		return confire;
+	}
+	public void setConfire(int confire) {
+		this.confire = confire;
+	}
 	public int getId() {
 		return id;
 	}

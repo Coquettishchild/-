@@ -46,11 +46,15 @@ btn.onclick=function(){
     xhr3.onreadystatechange=function () {
         if (xhr3.readyState == 4 && xhr3.status == 200) {
             var obj = xhr3.responseText;
-            var json = JSON.parse(obj);
-            if(json.flag){
-                window.location.href="./createnew.html"
-            }else{
-                alert(json.message);
+            try{
+            	var json = JSON.parse(obj);
+            	if(json.flag){
+            		window.location.href="./createnew.html"
+            	}else{
+            		alert(json.message);
+            	}
+            }catch (e) {
+            	alert("邮箱已经被注册过了");
             }
         }
     }

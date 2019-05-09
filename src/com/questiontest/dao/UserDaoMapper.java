@@ -13,4 +13,6 @@ public interface UserDaoMapper {
 		public User getUser(String username)throws Exception;
 		//修改密码
 		public void updata(User user)throws Exception;
+		//修改confire
+		public void confire(String email)throws Exception;
 }
