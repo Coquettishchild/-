@@ -18,7 +18,7 @@ function createxmlreuqest() {
 var xhr = createxmlreuqest();
 xhr.open("post","../confire.action",true);
 xhr.setRequestHeader("content-type","application/x-www-form-urlencoded");
-xhr.send("email="+paraString);
+xhr.send("code="+paraString);
 xhr.onreadystatechange = function() {
     if (xhr.readyState == 4 && xhr.status == 200) {
         var obj = xhr.responseText;

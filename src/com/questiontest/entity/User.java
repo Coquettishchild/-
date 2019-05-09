@@ -10,17 +10,30 @@ public class User implements Cloneable{
 	private String email;
 	private String password;
 	private int confire;
+	private String randomcode;
 	private List<Paper> papers;
-	public User(String username, String sex, int age, String email, String password) {
+	
+	public User(int id, String username, String sex, int age, String email, String password, String randomcode,
+			List<Paper> papers) {
 		super();
+		this.id = id;
 		this.username = username;
 		this.sex = sex;
 		this.age = age;
 		this.email = email;
 		this.password = password;
+		this.randomcode = randomcode;
+		this.papers = papers;
 	}
+
 	public User() {}
 	
+	public String getRandomcode() {
+		return randomcode;
+	}
+	public void setRandomcode(String randomcode) {
+		this.randomcode = randomcode;
+	}
 	public int getConfire() {
 		return confire;
 	}

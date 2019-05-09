@@ -8,7 +8,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
 			select last_insert_id()
 		</selectKey>
-		insert into user(username,sex,age,email,password) values(#{username},#{sex},#{age},#{email},#{password})
+		insert into user(username,sex,age,email,password,randomcode) values(#{username},#{sex},#{age},#{email},#{password},#{randomcode})
 	</insert>
 <!-- 通过用户名获取密码 -->
 	<select id="getUser" parameterType="java.lang.String" resultType="user">
@@ -24,6 +24,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 <!-- 通过邮箱修改confire -->
 	<select id="confire" parameterType="java.lang.String" resultType="user">
-		update user set confire = 1 where email=#{email}
+		update user set confire = 1 where randomcode=#{randomcode}
 	</select>
 </mapper>

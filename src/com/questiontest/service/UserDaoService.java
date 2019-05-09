@@ -69,9 +69,9 @@ public class UserDaoService {
 	/*
 	 * 验证邮箱
 	 */
-	public boolean confire(String email) {
+	public boolean confire(String randomcode) {
 		try {
-			dao.confire(email);
+			dao.confire(randomcode);
 			return true;
 		} catch (Exception e) {
 			e.printStackTrace();

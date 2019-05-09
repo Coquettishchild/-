@@ -9,12 +9,35 @@ import javax.mail.Message.RecipientType;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-public class SendMail {
+public class SendMail implements Runnable{
 	public static String myEmailAccount = "619202755@qq.com";
 	public static String myEmailPassword = "lqedxujcvuldbcaa";
 	public static String myEmailSMTPHost = "smtp.qq.com";
+	private String email;
+	private String message2;
+	public SendMail(String email,String message2) {
+		this.email=email;
+		this.message2=message2;
+	}
+	/** 创建一封邮件邮件 */
 
-	public static boolean sendVerfileEmail(String email,String message2) {
+	public static MimeMessage createMimeMessage(Session session, String sendMail, String receiveMail,String message2) throws Exception {
+
+		MimeMessage message = new MimeMessage(session);
+		// From: 发件人
+		message.setFrom(new InternetAddress(sendMail, "问卷调查系统", "UTF-8"));
+		// To: 收件人
+		message.addRecipient(RecipientType.TO, new InternetAddress(receiveMail, "UTF-8"));
+		message.setSubject("邮箱验证", "UTF-8");
+		message.setContent(message2, "text/html;charset=UTF-8");
+		message.setSentDate(new Date());
+		message.saveChanges();
+		return message;
+
+	}
+
+	@Override
+	public void run() {
 		try {
 			//收件人邮箱
 			String receiveMailAccount = email;
@@ -33,30 +56,12 @@ public class SendMail {
 			transport.connect(myEmailAccount, myEmailPassword);
 			transport.sendMessage(message, message.getAllRecipients());
 			transport.close();
-			return true;
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.err.println("发送邮件失败");
-			return false;
 		}
 
-	}
-
-	/** 创建一封邮件邮件 */
-
-	public static MimeMessage createMimeMessage(Session session, String sendMail, String receiveMail,String message2) throws Exception {
-
-		MimeMessage message = new MimeMessage(session);
-		// From: 发件人
-		message.setFrom(new InternetAddress(sendMail, "问卷调查系统", "UTF-8"));
-		// To: 收件人
-		message.addRecipient(RecipientType.TO, new InternetAddress(receiveMail, "UTF-8"));
-		message.setSubject("邮箱验证", "UTF-8");
-		message.setContent(message2, "text/html;charset=UTF-8");
-		message.setSentDate(new Date());
-		message.saveChanges();
-		return message;
-
+		
 	}
 
 }

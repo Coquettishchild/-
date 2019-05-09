@@ -1,5 +1,8 @@
 package com.questiontest.controller;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.ibatis.annotations.Param;
@@ -18,6 +21,7 @@ import com.questiontest.entity.ResponseObject;
 import com.questiontest.entity.User;
 import com.questiontest.service.Service;
 import com.questiontest.service.UserDaoService;
+import com.questiontest.util.RandomString;
 import com.questiontest.util.SendMail;
 
 @Controller
@@ -25,6 +29,8 @@ public class UserController {
 	@Autowired
 	private  UserDaoService service;
 	
+	private static ExecutorService s1 = Executors.newFixedThreadPool(100);
+	private static ExecutorService s2 = Executors.newFixedThreadPool(100);
 	@RequestMapping(value = "login.action",method = RequestMethod.POST)
 	public  @ResponseBody ResponseMessage login(@Param(value = "username")String username,@Param(value = "password")String password,HttpServletRequest request) {
 		User user =service.getUser(username);
@@ -45,6 +51,7 @@ public class UserController {
 	
 	@RequestMapping(value = "zhuce.action",method = RequestMethod.POST)
 	public @ResponseBody ResponseMessage reginster(@Param(value="user") User user,HttpServletRequest request) {
+		user.setRandomcode(RandomString.getRandomString(7));
 		int flag=service.insertUser(user);
 		ResponseMessage message = new ResponseMessage();
 		if(flag==-1) {
@@ -129,9 +136,10 @@ public class UserController {
 	
 	@RequestMapping(value="confireemail.action",method=RequestMethod.POST)
 	public @ResponseBody ResponseMessage confireEmail(HttpServletRequest request) {
+		String code = ((User)request.getSession().getAttribute("user")).getRandomcode();
 		String email = ((User)request.getSession().getAttribute("user")).getEmail();
-		String url = "<a href='http://localhost:8080/QuestionTest/secendhtml/confire.html?email="+email+"'>点击验证</a>";
-		SendMail.sendVerfileEmail(email,url);
+		String url = "<a href='http://localhost:8080/QuestionTest/secendhtml/confire.html?code="+code+"'>点击验证</a>";
+		s1.execute(new SendMail(email, url));
 		ResponseMessage message = new ResponseMessage();
 		message.setFlag(true);
 		message.setMessage("我们已经向您的邮箱发送了验证消息，请及时处理");
@@ -139,8 +147,8 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="confire.action",method=RequestMethod.POST)
-	public @ResponseBody ResponseMessage confire(String email) {
-		boolean flag =service.confire(email);
+	public @ResponseBody ResponseMessage confire(String code) {
+		boolean flag =service.confire(code);
 		ResponseMessage message = new ResponseMessage();
 		message.setFlag(flag);
 		if(flag) {
@@ -158,12 +166,12 @@ public class UserController {
 		if(user!=null) {
 			int confire = user.getConfire();
 			String email= user.getEmail();
-			String password="abc123";
+			String password=RandomString.getRandomString(10);
 			if(confire==1) {
 				message.setFlag(true);
 				user.setPassword(password);
 				service.updata(user);
-				SendMail.sendVerfileEmail(email, password);
+				s2.execute(new SendMail(email, password));
 				message.setMessage("我们已经重置了您的密码，并发到您的邮箱上了");
 			}else {
 				message.setFlag(false);

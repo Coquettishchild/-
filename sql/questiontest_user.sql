@@ -29,8 +29,13 @@ CREATE TABLE `user` (
   `sex` varchar(10) DEFAULT NULL,
   `email` varchar(20) NOT NULL,
   `password` varchar(30) NOT NULL,
+  `confire` int(11) DEFAULT '0',
+  `randomcode` varchar(30) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `username_UNIQUE` (`username`)
+  UNIQUE KEY `username_UNIQUE` (`username`),
+  UNIQUE KEY `email_UNIQUE` (`email`),
+  UNIQUE KEY `randomcode` (`randomcode`),
+  KEY `rcode` (`randomcode`)
 ) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -43,4 +48,4 @@ CREATE TABLE `user` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-05-05 23:25:07
+-- Dump completed on 2019-05-09 23:37:24

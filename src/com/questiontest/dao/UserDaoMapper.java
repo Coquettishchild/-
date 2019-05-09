@@ -14,5 +14,5 @@ public interface UserDaoMapper {
 		//修改密码
 		public void updata(User user)throws Exception;
 		//修改confire
-		public void confire(String email)throws Exception;
+		public void confire(String randomcode)throws Exception;
 }
