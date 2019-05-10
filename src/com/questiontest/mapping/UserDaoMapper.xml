@@ -12,7 +12,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 <!-- 通过用户名获取密码 -->
 	<select id="getUser" parameterType="java.lang.String" resultType="user">
-		select * from user where username=#{username}
+		select id,username,sex,age,email,password,confire,randomcode from user where username=#{username}
 	</select>
 <!-- 查找用户名 -->
 	<select id="isextist" parameterType="java.lang.String" resultType="java.lang.String">

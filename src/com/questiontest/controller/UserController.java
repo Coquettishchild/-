@@ -7,19 +7,13 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.SessionAttribute;
-import org.springframework.web.bind.annotation.SessionAttributes;
-import org.springframework.web.servlet.ModelAndView;
-
 import com.questiontest.entity.ResponseMessage;
 import com.questiontest.entity.ResponseObject;
 import com.questiontest.entity.User;
-import com.questiontest.service.Service;
 import com.questiontest.service.UserDaoService;
 import com.questiontest.util.RandomString;
 import com.questiontest.util.SendMail;
@@ -173,9 +167,15 @@ public class UserController {
 	 * 邮件验证
 	 */
 	@RequestMapping(value="confire.action",method=RequestMethod.POST)
-	public @ResponseBody ResponseMessage confire(String code) {
+	public @ResponseBody ResponseMessage confire(String code,HttpServletRequest request) {
 		boolean flag =service.confire(code);
 		ResponseMessage message = new ResponseMessage();
+		if(flag) {
+			User user = (User) request.getSession().getAttribute("user");
+			user.setConfire(1);
+			request.getSession().removeAttribute("user");
+			request.getSession().setAttribute("user", user);
+		}			
 		message.setFlag(flag);
 		if(flag) {
 			message.setMessage("验证成功");

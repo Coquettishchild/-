@@ -32,6 +32,7 @@ button.onclick=function () {
             	}
             }catch(e){
             	alert("请勿重复登录");
+            	window.location.href="./createnew.html";
             }
 
         }

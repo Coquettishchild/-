@@ -12,6 +12,7 @@ import com.questiontest.entity.User;
 public class UserDaoService {
 	@Resource
 	private UserDaoMapper dao;
+
 	/*
 	 * 插入用户信息
 	 */
@@ -25,15 +26,16 @@ public class UserDaoService {
 			return -1;
 		}
 	}
+
 	/*
 	 * 查询用户名是否存在
 	 */
 	public boolean isextist(String username) {
 		try {
-			String str=dao.isextist(username);
-			if(str!=null && !"".equals(str)) {
+			String str = dao.isextist(username);
+			if (str != null && !"".equals(str)) {
 				return true;
-			}else {
+			} else {
 				return false;
 			}
 		} catch (Exception e) {
@@ -42,6 +44,7 @@ public class UserDaoService {
 			return false;
 		}
 	}
+
 	/*
 	 * 查询用户
 	 */
@@ -54,16 +57,21 @@ public class UserDaoService {
 			return null;
 		}
 	}
+
 	/*
 	 * 修改用户信息
 	 */
-	public boolean updata(User user,HttpServletRequest request) {
+	public boolean updata(User user, HttpServletRequest request) {
 		try {
-			String email = ((User)request.getSession().getAttribute("user")).getEmail();
-			if(email.equals(user.getEmail())) {
-				dao.updata(user);
-			}else {
+			if (((User) request.getSession().getAttribute("user"))== null) {
 				dao.updatacon(user);
+			} else {
+				String email = ((User) request.getSession().getAttribute("user")).getEmail();
+				if (email != null && email.equals(user.getEmail())) {
+					dao.updata(user);
+				} else {
+					dao.updatacon(user);
+				}
 			}
 			return true;
 		} catch (Exception e) {
@@ -72,6 +80,7 @@ public class UserDaoService {
 			return false;
 		}
 	}
+
 	/*
 	 * 验证邮箱
 	 */
