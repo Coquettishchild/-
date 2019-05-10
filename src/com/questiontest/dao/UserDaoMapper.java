@@ -15,4 +15,6 @@ public interface UserDaoMapper {
 		public void updata(User user)throws Exception;
 		//修改confire
 		public void confire(String randomcode)throws Exception;
+		//邮箱修改，从新验证
+		public void updatacon(User user) throws Exception; 
 }

@@ -31,6 +31,10 @@ public class UserController {
 	
 	private static ExecutorService s1 = Executors.newFixedThreadPool(100);
 	private static ExecutorService s2 = Executors.newFixedThreadPool(100);
+	
+	/*
+	 *用户登录 
+	 */
 	@RequestMapping(value = "login.action",method = RequestMethod.POST)
 	public  @ResponseBody ResponseMessage login(@Param(value = "username")String username,@Param(value = "password")String password,HttpServletRequest request) {
 		User user =service.getUser(username);
@@ -49,6 +53,9 @@ public class UserController {
 		return message;
 	}
 	
+	/*
+	 * 用户注册
+	 */
 	@RequestMapping(value = "zhuce.action",method = RequestMethod.POST)
 	public @ResponseBody ResponseMessage reginster(@Param(value="user") User user,HttpServletRequest request) {
 		user.setRandomcode(RandomString.getRandomString(7));
@@ -66,6 +73,9 @@ public class UserController {
 		return message;
 	}
 	
+	/*
+	 * 判断用户是否存在
+	 */
 	@RequestMapping(value="isexist.action",method = RequestMethod.POST)
 	public @ResponseBody ResponseMessage isexist(@Param(value="username") String username) {
 		boolean flag =service.isextist(username);
@@ -79,6 +89,9 @@ public class UserController {
 		return message;
 	}
 	
+	/*
+	 * 更新用户信息
+	 */
 	@RequestMapping(value="updata.action",method = RequestMethod.POST)
 	public @ResponseBody ResponseMessage updata(@Param("user") User user,HttpServletRequest request) {
 		User user2 = (User) request.getSession().getAttribute("user");
@@ -86,7 +99,7 @@ public class UserController {
 		user.setUsername(user2.getUsername());
 		user.setPassword(user2.getPassword());
 		System.err.println(user);
-		boolean flag=service.updata(user);
+		boolean flag=service.updata(user,request);
 		ResponseMessage message = new ResponseMessage();
 		message.setFlag(flag);
 		if(flag) {
@@ -99,6 +112,9 @@ public class UserController {
 		return message;
 	}
 	
+	/*
+	 * 获取用户
+	 */
 	@RequestMapping(value="getuser.action",method = RequestMethod.POST)
 	public @ResponseBody ResponseObject getUser(HttpServletRequest request) {
 		Object user = request.getSession().getAttribute("user");
@@ -108,6 +124,9 @@ public class UserController {
 		return obj;
 	}
 	
+	/*
+	 * 用户登出
+	 */
 	@RequestMapping(value="dropuser.action",method =RequestMethod.POST)
 	public @ResponseBody ResponseMessage dropUser(HttpServletRequest request) {
 		ResponseMessage message = new ResponseMessage();
@@ -117,12 +136,15 @@ public class UserController {
 		return message;
 	}
 	
+	/*
+	 * 更新密码
+	 */
 	@RequestMapping(value="updatepassword.action",method = RequestMethod.POST)
 	public @ResponseBody ResponseMessage updatapassword(String password,HttpServletRequest request) {
 		ResponseMessage message = new ResponseMessage();
 		User user = (User) request.getSession().getAttribute("user");
 		user.setPassword(password);
-		boolean flag=service.updata(user);
+		boolean flag=service.updata(user,request);
 		message.setFlag(flag);
 		if(flag) {
 			request.getSession().removeAttribute("user");
@@ -133,7 +155,9 @@ public class UserController {
 		}
 		return message;
 	}
-	
+	/*
+	 * 发送验证邮件
+	 */
 	@RequestMapping(value="confireemail.action",method=RequestMethod.POST)
 	public @ResponseBody ResponseMessage confireEmail(HttpServletRequest request) {
 		String code = ((User)request.getSession().getAttribute("user")).getRandomcode();
@@ -145,7 +169,9 @@ public class UserController {
 		message.setMessage("我们已经向您的邮箱发送了验证消息，请及时处理");
 		return message;
 	}
-	
+	/*
+	 * 邮件验证
+	 */
 	@RequestMapping(value="confire.action",method=RequestMethod.POST)
 	public @ResponseBody ResponseMessage confire(String code) {
 		boolean flag =service.confire(code);
@@ -159,8 +185,11 @@ public class UserController {
 		return message;
 	}
 	
+	/*
+	 * 重置密码发送邮箱
+	 */
 	@RequestMapping(value="forget.action",method =RequestMethod.POST)
-	public @ResponseBody ResponseMessage forget(String username) {
+	public @ResponseBody ResponseMessage forget(String username,HttpServletRequest request) {
 		ResponseMessage message = new ResponseMessage();
 		User user=service.getUser(username);
 		if(user!=null) {
@@ -170,7 +199,7 @@ public class UserController {
 			if(confire==1) {
 				message.setFlag(true);
 				user.setPassword(password);
-				service.updata(user);
+				service.updata(user,request);
 				s2.execute(new SendMail(email, password));
 				message.setMessage("我们已经重置了您的密码，并发到您的邮箱上了");
 			}else {

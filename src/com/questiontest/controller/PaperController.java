@@ -24,6 +24,9 @@ public class PaperController {
 	@Autowired
 	private PaperDaoService service;
 
+	/*
+	 * 添加问卷
+	 */
 	@RequestMapping(value = "addpaper.action", method = RequestMethod.POST)
 	public @ResponseBody ResponseMessage addPaper(Paper paper, HttpServletRequest request) {
 		paper.setData(new SimpleDateFormat("yyyy-MM-dd HH:mm").format(new Date()));
@@ -45,6 +48,9 @@ public class PaperController {
 		return message;
 	}
 
+	/*
+	 * 查询单个问卷的所有信息
+	 */
 	@RequestMapping(value = "quertonepaper.action", method = RequestMethod.POST)
 	public @ResponseBody ResponseObject getOnePaper(HttpServletRequest request) {
 		int id = (int) request.getSession().getAttribute("addpaperid");
@@ -59,7 +65,10 @@ public class PaperController {
 		}
 		return response;
 	}
-
+	
+	/*
+	 * 查询一张问卷
+	 */
 	@RequestMapping(value = "answerpaper.action", method = RequestMethod.POST)
 	public @ResponseBody ResponseObject answerpaper(int id, HttpServletRequest request) {
 		ResponseObject response = new ResponseObject();
@@ -73,7 +82,10 @@ public class PaperController {
 		}
 		return response;
 	}
-
+	
+	/*
+	 * 查询问卷列表
+	 */
 	@RequestMapping(value = "getpaperList.action", method = RequestMethod.POST)
 	public @ResponseBody ResponseObject getpaperList(int index, HttpServletRequest request) {
 		User user = (User) request.getSession().getAttribute("user");
@@ -89,6 +101,9 @@ public class PaperController {
 		return response;
 	}
 
+	/*
+	 * 普通用户删除问卷
+	 */
 	@RequestMapping(value = "deletePaper.action", method = RequestMethod.POST)
 	public @ResponseBody ResponseMessage deletePaper(@Param("id") String id) {
 		int realid = Integer.parseInt(id);
@@ -102,7 +117,10 @@ public class PaperController {
 		}
 		return message;
 	}
-
+	
+	/*
+	 * 修改问卷
+	 */
 	@RequestMapping(value = "changepaper.action", method = RequestMethod.POST)
 	public @ResponseBody ResponseMessage changePaper(int id, HttpServletRequest request) {
 		ResponseMessage message = new ResponseMessage();

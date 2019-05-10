@@ -1,6 +1,7 @@
 package com.questiontest.service;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Repository;
 
@@ -54,11 +55,16 @@ public class UserDaoService {
 		}
 	}
 	/*
-	 * 修改密码
+	 * 修改用户信息
 	 */
-	public boolean updata(User user) {
+	public boolean updata(User user,HttpServletRequest request) {
 		try {
-			dao.updata(user);
+			String email = ((User)request.getSession().getAttribute("user")).getEmail();
+			if(email.equals(user.getEmail())) {
+				dao.updata(user);
+			}else {
+				dao.updatacon(user);
+			}
 			return true;
 		} catch (Exception e) {
 			e.printStackTrace();

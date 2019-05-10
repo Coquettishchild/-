@@ -19,6 +19,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select username from user where username=#{username}
 	</select>
 <!-- 修改自身信息 -->
+	<update id="updatacon" parameterType="user" >
+		update user set password=#{password},username=#{username},sex=#{sex},age=#{age},confire=0,email=#{email} where id=#{id}
+	</update>
+<!-- 如果邮箱修改从新验证 -->
 	<update id="updata" parameterType="user" >
 		update user set password=#{password},username=#{username},sex=#{sex},age=#{age},email=#{email} where id=#{id}
 	</update>

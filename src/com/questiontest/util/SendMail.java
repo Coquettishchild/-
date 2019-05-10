@@ -18,6 +18,7 @@ public class SendMail implements Runnable{
 	public SendMail(String email,String message2) {
 		this.email=email;
 		this.message2=message2;
+		System.out.println(message2);
 	}
 	/** 创建一封邮件邮件 */
 

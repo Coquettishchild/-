@@ -1,5 +1,4 @@
-var url = location.href;
-var paraString = url.substring(url.indexOf("=") + 1, url.length);
+
 function createxmlreuqest() {
     try {
         return new XMLHttpRequest();
@@ -15,6 +14,9 @@ function createxmlreuqest() {
         }
     }
 }
+var url = location.href;
+var paraString = url.substring(url.indexOf("=") + 1, url.length);
+console.log(paraString);
 var xhr = createxmlreuqest();
 xhr.open("post","../confire.action",true);
 xhr.setRequestHeader("content-type","application/x-www-form-urlencoded");

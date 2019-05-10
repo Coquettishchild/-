@@ -19,6 +19,9 @@ public class QuestionController {
 	@Autowired
 	private QuestionDaoService service;
 	
+	/*
+	 * 添加题目
+	 */
 	@RequestMapping(value="addQuestion.action",method=RequestMethod.POST)
 	public @ResponseBody ResponseMessage addQuestion(@RequestBody Questions question,HttpServletRequest request) {
 		int id = (int) request.getSession().getAttribute("addpaperid");
@@ -37,6 +40,9 @@ public class QuestionController {
 		return message;
 	}
 	
+	/*
+	 * 更新问题
+	 */
 	@RequestMapping(value="updataQuestion.action",method = RequestMethod.POST)
 	public @ResponseBody ResponseMessage updataQuestion(@RequestBody Questions question) {
 		boolean flag =service.updateQuestion(question);
@@ -50,6 +56,9 @@ public class QuestionController {
 		return message;
 	}
 	
+	/*
+	 * 删除问题
+	 */
 	@RequestMapping(value="deleteQuestion.action",method = RequestMethod.POST)
 	public @ResponseBody ResponseMessage deleteQuestion(int id) {
 		boolean flag=service.deleteQuestion(id);
