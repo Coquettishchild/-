@@ -10,8 +10,8 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 public class SendMail implements Runnable{
-	public static String myEmailAccount = "619202755@qq.com";
-	public static String myEmailPassword = "lqedxujcvuldbcaa";
+	public static String myEmailAccount = "邮箱";
+	public static String myEmailPassword = "生成的密码";
 	public static String myEmailSMTPHost = "smtp.qq.com";
 	private String email;
 	private String message2;
