@@ -156,7 +156,9 @@ public class UserController {
 	public @ResponseBody ResponseMessage confireEmail(HttpServletRequest request) {
 		String code = ((User)request.getSession().getAttribute("user")).getRandomcode();
 		String email = ((User)request.getSession().getAttribute("user")).getEmail();
-		String url = "<a href='http://localhost:8080/QuestionTest/secendhtml/confire.html?code="+code+"'>点击验证</a>";
+		String url2 = request.getContextPath().toString();
+		String ur3 = request.getRealPath("./");
+		String url = "<a href='http://47.93.61.90/QuestionTest/secendhtml/confire.html?code="+code+"'>点击验证</a>";
 		s1.execute(new SendMail(email, url));
 		ResponseMessage message = new ResponseMessage();
 		message.setFlag(true);

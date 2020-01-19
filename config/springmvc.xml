@@ -9,10 +9,10 @@
         http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context-4.0.xsd">
-
+	<!-- 开启注解 -->
+ 	<mvc:annotation-driven/>
  	<!-- 自动扫描controller -->
  	<context:component-scan base-package="com.questiontest.controller"/>  
- 	<mvc:annotation-driven/>
  	<mvc:interceptors>
  		<!-- 编码拦截器 -->
  		<mvc:interceptor>
